@@ -27,7 +27,11 @@ public class GildedRoseTest {
 		store.addItem(new Item("Aged Brie", 2, 10) );
 		
 		// Act
+		
+			
+		
 		store.updateEndOfDay();
+		
 		
 		// Assert
 		List<Item> items = store.getItems();
@@ -36,7 +40,65 @@ public class GildedRoseTest {
 	}
     
 	@Test
-	public void testUpdateEndOfDay() {
-		fail("Test not implemented");
+	public void testRagnaros_quality_never_decreases_Hand_of_Ragnaros_0_80() {
+		GildedRose store = new GildedRose();
+		store.addItem(new Item("Sulfuras, Hand of Ragnaros", 0, 80) );
+		
+		for(int i=0; i<8; i++) {
+			store.updateEndOfDay();
+		}
+		
+		List<Item> items = store.getItems();
+		Item itemRagnaros = items.get(0);
+		assertEquals(80, itemRagnaros.getQuality());
 	}
+	@Test
+	public void testBackstagepasses_test1_11_10(){
+		GildedRose store = new GildedRose();
+		store.addItem(new Item("Backstage passes to a TAFKAL80ETC concert", 11, 10) );
+		store.updateEndOfDay();
+		
+		List<Item> items = store.getItems();
+		Item itemPasses = items.get(0);
+		assertEquals(11, itemPasses.getQuality());
+	}
+	@Test
+	public void testBackstagepasses_test2_10_10(){
+		GildedRose store = new GildedRose();
+		store.addItem(new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10) );
+		
+		for(int i=0; i<5; i++) {
+			
+			store.updateEndOfDay();
+			
+		}
+		List<Item> items = store.getItems();
+		Item itemPasses = items.get(0);
+		assertEquals(20, itemPasses.getQuality());
+	}
+	@Test
+	public void testBackstagepasses_test3_5_10(){
+		GildedRose store = new GildedRose();
+		store.addItem(new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10) );
+		
+		for(int i=0; i<5; i++) {
+			
+			store.updateEndOfDay();
+			
+		}
+		List<Item> items = store.getItems();
+		Item itemPasses = items.get(0);
+		assertEquals(25, itemPasses.getQuality());
+	}
+	@Test
+	public void testBackstagepasses_test4_0_10(){
+		GildedRose store = new GildedRose();
+		store.addItem(new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10) );
+		store.updateEndOfDay();
+		
+		List<Item> items = store.getItems();
+		Item itemPasses = items.get(0);
+		assertEquals(0, itemPasses.getQuality());
+	}
+		
 }
